@@ -23,10 +23,24 @@ var Stack = /** @class */ (function () {
             this.size++;
         }
     };
+    Stack.prototype.pop = function () {
+        if (this.isEmpty()) {
+            throw ('Stack is empty');
+        }
+        else {
+            var removedHead = this.stack.removeHead();
+            this.size--;
+            return removedHead;
+        }
+    };
     return Stack;
 }());
 var s = new Stack(4);
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < 4; i++) {
     s.push(i);
+    console.log(s.stack.print());
+}
+for (var i = 0; i < 5; i++) {
+    s.pop();
     console.log(s.stack.print());
 }

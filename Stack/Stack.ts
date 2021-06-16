@@ -28,11 +28,15 @@ class Stack {
             this.size++;
         }
     }
+
+    pop(): Node {
+        if (this.isEmpty()) {
+            throw('Stack is empty');
+        } else {
+            const removedHead: Node = this.stack.removeHead();
+            this.size--;
+            return removedHead;
+        }
+    }
 }
 
-const s = new Stack(4);
-
-for (let i = 0; i < 5; i++) {
-    s.push(i);
-    console.log(s.stack.print());
-}
