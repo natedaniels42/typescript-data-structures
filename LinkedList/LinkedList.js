@@ -58,6 +58,24 @@ var LinkedList = /** @class */ (function () {
         }
         return current;
     };
+    LinkedList.prototype.reverse = function () {
+        var current = this.head;
+        var previous = null;
+        var next = current.getNextNode();
+        if (!current || !current.getNextNode()) {
+            return null;
+        }
+        while (current) {
+            current.setNextNode(previous);
+            previous = current;
+            current = next;
+            if (next !== null) {
+                next = next.getNextNode();
+            }
+        }
+        this.head = previous;
+        return previous;
+    };
     LinkedList.prototype.print = function () {
         var str = '<head> ';
         var current = this.head;
@@ -78,7 +96,5 @@ list.addToTail(4);
 list.addToTail(5);
 list.addToTail(6);
 console.log(list.print());
-for (var i = 0; i < 6; i++) {
-    list.removeTail();
-    console.log(list.print());
-}
+list.reverse();
+console.log(list.print());

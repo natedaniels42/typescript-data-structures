@@ -68,6 +68,26 @@ class LinkedList {
         return current;
     }
 
+    reverse(): Node | null {
+        let current: Node | null = this.head;
+        let previous: Node | null = null;
+        let next: Node | null = current.getNextNode();
+        
+        if (!current || ! current.getNextNode()) {
+            return null;
+        }
+        while(current) {
+            current.setNextNode(previous);
+            previous = current;
+            current = next;
+            if (next !== null) {
+                next = next.getNextNode();
+            }
+        }
+        this.head = previous;
+        return previous;
+    }
+
     print(): string {
         let str: string = '<head> ';
         let current: Node | null = this.head;
