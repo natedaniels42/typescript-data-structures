@@ -1,3 +1,5 @@
+import Queue from "../Queue/Queue";
+
 class BinaryTree {
     value: number;
     depth: number;
@@ -48,4 +50,23 @@ class BinaryTree {
             this.right.depthFirstTraversal();
         }
     }
+
+    breadthFirstTraversal(): void {
+        const queue: Queue = new Queue();
+        queue.enqueue(this);
+        
+        while (!queue.isEmpty()) {
+            const current: BinaryTree = queue.dequeue().data;
+            console.log(current.value);
+
+            if (current.left) {
+                queue.enqueue(current.left)
+            }
+            if (current.right) {
+                queue.enqueue(current.right);
+            }
+        }
+    }
 }
+
+export default BinaryTree;

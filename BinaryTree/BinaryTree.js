@@ -1,3 +1,6 @@
+"use strict";
+exports.__esModule = true;
+var Queue_1 = require("../Queue/Queue");
 var BinaryTree = /** @class */ (function () {
     function BinaryTree(value, depth) {
         if (depth === void 0) { depth = 1; }
@@ -47,10 +50,20 @@ var BinaryTree = /** @class */ (function () {
             this.right.depthFirstTraversal();
         }
     };
+    BinaryTree.prototype.breadthFirstTraversal = function () {
+        var queue = new Queue_1["default"]();
+        queue.enqueue(this);
+        while (!queue.isEmpty()) {
+            var current = queue.dequeue().data;
+            console.log(current.value);
+            if (current.left) {
+                queue.enqueue(current.left);
+            }
+            if (current.right) {
+                queue.enqueue(current.right);
+            }
+        }
+    };
     return BinaryTree;
 }());
-var bt = new BinaryTree(50);
-for (var i = 10; i <= 100; i += 10) {
-    bt.add(i);
-}
-bt.depthFirstTraversal();
+exports["default"] = BinaryTree;
