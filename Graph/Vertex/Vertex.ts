@@ -9,8 +9,12 @@ class Vertex {
         this.edges = [];
     }
 
-    addEdge(vertex: Vertex, weight: number | null = null) {
+    addEdge(vertex: Vertex, weight: number | null = null): void {
         this.edges.push(new Edge(this, vertex, weight));
+    }
+
+    removeEdge(vertex: Vertex): void {
+        this.edges = this.edges.filter(edge => edge.end !== vertex);
     }
 }
 
