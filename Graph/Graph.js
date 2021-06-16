@@ -14,6 +14,10 @@ var Graph = /** @class */ (function () {
         this.vertices.push(newVertex);
         return newVertex;
     };
+    Graph.prototype.removeVertex = function (vertex) {
+        vertex.edges.forEach(function (edge) { return edge.end.removeEdge(vertex); });
+        this.vertices = this.vertices.filter(function (v) { return v !== vertex; });
+    };
     return Graph;
 }());
 var g = new Graph(true);
@@ -37,4 +41,5 @@ g.addEdge(five, eight, 112);
 g.addEdge(four, six, 321);
 g.addEdge(seven, nine, 85);
 g.addEdge(six, eight, 22);*/
+g.removeVertex(four);
 console.log(g);

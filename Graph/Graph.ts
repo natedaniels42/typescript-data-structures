@@ -17,4 +17,10 @@ class Graph {
         this.vertices.push(newVertex);
         return newVertex;
     }
+
+    removeVertex(vertex: Vertex): void {
+        vertex.edges.forEach(edge => edge.end.removeEdge(vertex));
+        this.vertices = this.vertices.filter(v => v !== vertex);
+    }
 }
+
