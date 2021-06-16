@@ -1,10 +1,23 @@
 "use strict";
 exports.__esModule = true;
+var Vertex_1 = require("../Graph/Vertex/Vertex");
 var PriorityQueue = /** @class */ (function () {
     function PriorityQueue() {
         this.heap = [null];
         this.size = 0;
     }
+    PriorityQueue.prototype.add = function (vertex, priority) {
+        this.heap.push({ vertex: vertex, priority: priority });
+        this.size++;
+        this.bubbleUp();
+    };
+    PriorityQueue.prototype.bubbleUp = function () {
+        var current = this.size;
+        while (current > 1 && this.heap[current].priority < this.heap[this.getParent(current)].priority) {
+            this.swap(current, this.getParent(current));
+            current = this.getParent(current);
+        }
+    };
     PriorityQueue.prototype.canSwap = function (current, left, right) {
         return (this.exists(left) && this.heap[left].priority < this.heap[current].priority) || (this.exists(right) && this.heap[right].priority < this.heap[current].priority);
     };
@@ -29,3 +42,7 @@ var PriorityQueue = /** @class */ (function () {
     };
     return PriorityQueue;
 }());
+var pq = new PriorityQueue();
+pq.add(new Vertex_1["default"](1), 1);
+pq.add(new Vertex_1["default"](0), 0);
+console.log(pq.heap);
