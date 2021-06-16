@@ -38,5 +38,14 @@ class Stack {
             return removedHead;
         }
     }
+
+    peek(): unknown {
+        if (this.isEmpty()) {
+            throw('Stack is empty');
+        } else {
+            return this.stack.head.data;
+        }
+    }
 }
 
+export default Stack;

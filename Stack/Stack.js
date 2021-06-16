@@ -33,14 +33,14 @@ var Stack = /** @class */ (function () {
             return removedHead;
         }
     };
+    Stack.prototype.peek = function () {
+        if (this.isEmpty()) {
+            throw ('Stack is empty');
+        }
+        else {
+            return this.stack.head.data;
+        }
+    };
     return Stack;
 }());
-var s = new Stack(4);
-for (var i = 0; i < 4; i++) {
-    s.push(i);
-    console.log(s.stack.print());
-}
-for (var i = 0; i < 5; i++) {
-    s.pop();
-    console.log(s.stack.print());
-}
+exports["default"] = Stack;
