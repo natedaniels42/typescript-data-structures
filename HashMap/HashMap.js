@@ -30,21 +30,26 @@ var HashMap = /** @class */ (function () {
             previous.setNextNode(new Node_1["default"]({ key: key, value: value }));
         }
     };
+    HashMap.prototype.retrieve = function (key) {
+        var arrayIndex = this.hash(key);
+        var list = this.hashMap[arrayIndex];
+        var current = list.head;
+        if (!current) {
+            return null;
+        }
+        while (current) {
+            if (current.data.key === key) {
+                return current.data.value;
+            }
+            current = current.getNextNode();
+        }
+        return null;
+    };
     return HashMap;
 }());
 var hm = new HashMap(5);
 hm.assign('cat', 'felix');
 hm.assign('act', 'play');
 hm.assign('tac', 'tic');
-var current = hm.hashMap[2].head;
-while (current) {
-    console.log([current.data.key, current.data.value]);
-    current = current.getNextNode();
-}
-hm.assign('cat', 'Panthero');
-hm.assign('act', 'movie');
-current = hm.hashMap[2].head;
-while (current) {
-    console.log([current.data.key, current.data.value]);
-    current = current.getNextNode();
-}
+console.log(hm.retrieve('cat'));
+console.log(hm.retrieve('tca'));

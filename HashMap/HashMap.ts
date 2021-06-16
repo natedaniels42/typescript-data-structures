@@ -31,6 +31,24 @@ class HashMap {
             previous.setNextNode(new Node({key, value}));
         }
     }
+
+    retrieve(key: string): unknown {
+        const arrayIndex: number = this.hash(key);
+        const list: LinkedList = this.hashMap[arrayIndex];
+        let current: Node | null = list.head;
+
+        if (!current) {
+            return null;
+        }
+
+        while(current) {
+            if (current.data.key === key) {
+                return current.data.value;
+            }
+            current = current.getNextNode();
+        }
+        return null;
+    }
 }
 
-
+export default HashMap;
