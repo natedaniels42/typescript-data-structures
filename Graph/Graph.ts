@@ -37,5 +37,8 @@ class Graph {
             vertex2.removeEdge(vertex1);
         }
     }
-}
 
+    print(): void {
+        this.vertices.forEach(vertex => vertex.print());
+    }
+}

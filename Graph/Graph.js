@@ -32,6 +32,9 @@ var Graph = /** @class */ (function () {
             vertex2.removeEdge(vertex1);
         }
     };
+    Graph.prototype.print = function () {
+        this.vertices.forEach(function (vertex) { return vertex.print(); });
+    };
     return Graph;
 }());
 var g = new Graph(true);
@@ -54,5 +57,4 @@ g.addEdge(five, eight, 112);
 g.addEdge(four, six, 321);
 g.addEdge(seven, nine, 85);
 g.addEdge(six, eight, 22);
-g.removeEdge(seven, nine);
-console.log(g);
+g.print();
