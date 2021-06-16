@@ -24,10 +24,24 @@ var BinaryTree = /** @class */ (function () {
             }
         }
     };
+    BinaryTree.prototype.getNodeByValue = function (value) {
+        if (value === this.value) {
+            return this;
+        }
+        else if (value < this.value && this.left) {
+            return this.left.getNodeByValue(value);
+        }
+        else if (value > this.value && this.right) {
+            return this.right.getNodeByValue(value);
+        }
+        else {
+            return null;
+        }
+    };
     return BinaryTree;
 }());
 var bt = new BinaryTree(50);
 for (var i = 10; i <= 100; i += 10) {
     bt.add(i);
 }
-console.log(bt);
+console.log(bt.getNodeByValue(22));

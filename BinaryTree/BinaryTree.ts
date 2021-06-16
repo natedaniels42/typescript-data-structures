@@ -26,5 +26,17 @@ class BinaryTree {
             }
         }
     }
+
+    getNodeByValue(value: number): BinaryTree {
+        if (value === this.value) {
+            return this;
+        } else if (value < this.value && this.left) {
+            return this.left.getNodeByValue(value);
+        } else if (value > this.value && this.right) {
+            return this.right.getNodeByValue(value);
+        } else {
+            return null;
+        }
+    }
 }
 
