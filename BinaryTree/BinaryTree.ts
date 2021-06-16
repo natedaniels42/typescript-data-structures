@@ -27,7 +27,7 @@ class BinaryTree {
         }
     }
 
-    getNodeByValue(value: number): BinaryTree {
+    getNodeByValue(value: number): BinaryTree | null {
         if (value === this.value) {
             return this;
         } else if (value < this.value && this.left) {
@@ -38,5 +38,14 @@ class BinaryTree {
             return null;
         }
     }
-}
 
+    depthFirstTraversal(): void {
+        if (this.left) {
+            this.left.depthFirstTraversal();
+        }
+        console.log(this.value);
+        if (this.right) {
+            this.right.depthFirstTraversal();
+        }
+    }
+}

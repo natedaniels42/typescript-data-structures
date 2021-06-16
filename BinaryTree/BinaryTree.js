@@ -38,10 +38,19 @@ var BinaryTree = /** @class */ (function () {
             return null;
         }
     };
+    BinaryTree.prototype.depthFirstTraversal = function () {
+        if (this.left) {
+            this.left.depthFirstTraversal();
+        }
+        console.log(this.value);
+        if (this.right) {
+            this.right.depthFirstTraversal();
+        }
+    };
     return BinaryTree;
 }());
 var bt = new BinaryTree(50);
 for (var i = 10; i <= 100; i += 10) {
     bt.add(i);
 }
-console.log(bt.getNodeByValue(22));
+bt.depthFirstTraversal();
