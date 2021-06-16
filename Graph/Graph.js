@@ -18,6 +18,20 @@ var Graph = /** @class */ (function () {
         vertex.edges.forEach(function (edge) { return edge.end.removeEdge(vertex); });
         this.vertices = this.vertices.filter(function (v) { return v !== vertex; });
     };
+    Graph.prototype.addEdge = function (vertex1, vertex2, weight) {
+        if (weight === void 0) { weight = null; }
+        var edgeWeight = this.isWeighted ? weight : null;
+        vertex1.addEdge(vertex2, edgeWeight);
+        if (!this.isDirected) {
+            vertex2.addEdge(vertex1, edgeWeight);
+        }
+    };
+    Graph.prototype.removeEdge = function (vertex1, vertex2) {
+        vertex1.removeEdge(vertex2);
+        if (!this.isDirected) {
+            vertex2.removeEdge(vertex1);
+        }
+    };
     return Graph;
 }());
 var g = new Graph(true);
@@ -30,7 +44,6 @@ var six = g.addVertex(6);
 var seven = g.addVertex(7);
 var eight = g.addVertex(8);
 var nine = g.addVertex(9);
-/*
 g.addEdge(one, two, 100);
 g.addEdge(one, four, 350);
 g.addEdge(two, three, 180);
@@ -40,6 +53,6 @@ g.addEdge(three, five, 280);
 g.addEdge(five, eight, 112);
 g.addEdge(four, six, 321);
 g.addEdge(seven, nine, 85);
-g.addEdge(six, eight, 22);*/
-g.removeVertex(four);
+g.addEdge(six, eight, 22);
+g.removeEdge(seven, nine);
 console.log(g);

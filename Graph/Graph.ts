@@ -22,5 +22,20 @@ class Graph {
         vertex.edges.forEach(edge => edge.end.removeEdge(vertex));
         this.vertices = this.vertices.filter(v => v !== vertex);
     }
+
+    addEdge(vertex1: Vertex, vertex2: Vertex, weight = null): void {
+        const edgeWeight = this.isWeighted ? weight : null;
+        vertex1.addEdge(vertex2, edgeWeight);
+        if (!this.isDirected) {
+            vertex2.addEdge(vertex1, edgeWeight);
+        }
+    }
+
+    removeEdge(vertex1: Vertex, vertex2: Vertex): void {
+        vertex1.removeEdge(vertex2);
+        if (!this.isDirected) {
+            vertex2.removeEdge(vertex1);
+        }
+    }
 }
 
