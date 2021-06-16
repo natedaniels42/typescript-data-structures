@@ -46,7 +46,26 @@ class LinkedList {
             }
             current.setNextNode(newTail);
         }
+    }
 
+    removeTail(): Node | null {
+        let current: Node | null = this.head;
+        let previous: Node | null = null;
+        
+        if (!current) {
+            return null;
+        }
+        if (!current.getNextNode()) {
+            this.head = null;
+        } else {
+            while (current.getNextNode()) {
+                previous = current;
+                current = current.getNextNode();
+            }
+
+            previous.setNextNode(null);
+        }
+        return current;
     }
 
     print(): string {
@@ -62,3 +81,5 @@ class LinkedList {
         return str;
     }
 }
+
+

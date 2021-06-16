@@ -40,6 +40,24 @@ var LinkedList = /** @class */ (function () {
             current.setNextNode(newTail);
         }
     };
+    LinkedList.prototype.removeTail = function () {
+        var current = this.head;
+        var previous = null;
+        if (!current) {
+            return null;
+        }
+        if (!current.getNextNode()) {
+            this.head = null;
+        }
+        else {
+            while (current.getNextNode()) {
+                previous = current;
+                current = current.getNextNode();
+            }
+            previous.setNextNode(null);
+        }
+        return current;
+    };
     LinkedList.prototype.print = function () {
         var str = '<head> ';
         var current = this.head;
@@ -56,10 +74,11 @@ var list = new LinkedList();
 list.addToHead(1);
 list.addToHead(2);
 list.addToHead(3);
-console.log(list.print());
 list.addToTail(4);
-console.log(list.print());
 list.addToTail(5);
-console.log(list.print());
 list.addToTail(6);
 console.log(list.print());
+for (var i = 0; i < 6; i++) {
+    list.removeTail();
+    console.log(list.print());
+}
