@@ -1,5 +1,6 @@
 import Vertex from "./Vertex/Vertex";
 import Edge from "./Edge/Edge";
+import Queue from "../Queue/Queue";
 
 class Graph {
     vertices: Vertex[];
@@ -52,7 +53,28 @@ class Graph {
         })
     }
 
+    breadthFirstTraversal(start: Vertex): void {
+        const visitedVertices: Vertex[] = [start];
+        const visitQueue: Queue = new Queue();
+        visitQueue.enqueue(start);
+
+        while(!visitQueue.isEmpty()) {
+            const current = visitQueue.dequeue().data;
+            console.log(current.data);
+
+            current.edges.forEach(edge => {
+                const neighbor: Vertex = edge.end;
+
+                if (visitedVertices.indexOf(neighbor) === -1) {
+                    visitedVertices.push(neighbor);
+                    visitQueue.enqueue(neighbor);
+                }
+            })
+        }
+    }
+
     print(): void {
         this.vertices.forEach(vertex => vertex.print());
     }
 }
+

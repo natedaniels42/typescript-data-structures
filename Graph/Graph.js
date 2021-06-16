@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var Vertex_1 = require("./Vertex/Vertex");
+var Queue_1 = require("../Queue/Queue");
 var Graph = /** @class */ (function () {
     function Graph(isWeighted, isDirected) {
         if (isWeighted === void 0) { isWeighted = false; }
@@ -44,6 +45,22 @@ var Graph = /** @class */ (function () {
             }
         });
     };
+    Graph.prototype.breadthFirstTraversal = function (start) {
+        var visitedVertices = [start];
+        var visitQueue = new Queue_1["default"]();
+        visitQueue.enqueue(start);
+        while (!visitQueue.isEmpty()) {
+            var current = visitQueue.dequeue().data;
+            console.log(current.data);
+            current.edges.forEach(function (edge) {
+                var neighbor = edge.end;
+                if (visitedVertices.indexOf(neighbor) === -1) {
+                    visitedVertices.push(neighbor);
+                    visitQueue.enqueue(neighbor);
+                }
+            });
+        }
+    };
     Graph.prototype.print = function () {
         this.vertices.forEach(function (vertex) { return vertex.print(); });
     };
@@ -69,4 +86,4 @@ g.addEdge(five, eight, 112);
 g.addEdge(four, six, 321);
 g.addEdge(seven, nine, 85);
 g.addEdge(six, eight, 22);
-g.depthFirstTraversal(one);
+g.breadthFirstTraversal(one);
