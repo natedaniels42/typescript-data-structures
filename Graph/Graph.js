@@ -32,6 +32,18 @@ var Graph = /** @class */ (function () {
             vertex2.removeEdge(vertex1);
         }
     };
+    Graph.prototype.depthFirstTraversal = function (start, visitedVertices) {
+        var _this = this;
+        if (visitedVertices === void 0) { visitedVertices = [start]; }
+        console.log(start.data);
+        start.edges.forEach(function (edge) {
+            var neighbor = edge.end;
+            if (visitedVertices.indexOf(neighbor) === -1) {
+                visitedVertices.push(neighbor);
+                _this.depthFirstTraversal(neighbor, visitedVertices);
+            }
+        });
+    };
     Graph.prototype.print = function () {
         this.vertices.forEach(function (vertex) { return vertex.print(); });
     };
@@ -57,4 +69,4 @@ g.addEdge(five, eight, 112);
 g.addEdge(four, six, 321);
 g.addEdge(seven, nine, 85);
 g.addEdge(six, eight, 22);
-g.print();
+g.depthFirstTraversal(one);

@@ -38,6 +38,20 @@ class Graph {
         }
     }
 
+    depthFirstTraversal(start: Vertex, visitedVertices: Vertex[] = [start]): void {
+        console.log(start.data);
+
+        start.edges.forEach(edge => {
+            const neighbor: Vertex = edge.end;
+
+            if (visitedVertices.indexOf(neighbor) === -1) {
+                visitedVertices.push(neighbor);
+
+                this.depthFirstTraversal(neighbor, visitedVertices);
+            }
+        })
+    }
+
     print(): void {
         this.vertices.forEach(vertex => vertex.print());
     }
