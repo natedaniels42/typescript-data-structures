@@ -89,6 +89,17 @@ var Graph = /** @class */ (function () {
         }
         return { distances: distances, previous: previous };
     };
+    Graph.prototype.shortestPath = function (start, end) {
+        var _a = this.dijkstras(start), distances = _a.distances, previous = _a.previous;
+        var distance = distances["" + end.data];
+        var path = [];
+        var current = end;
+        while (current) {
+            path.unshift(current.data);
+            current = previous["" + current.data];
+        }
+        return { distance: distance, path: path };
+    };
     Graph.prototype.print = function () {
         this.vertices.forEach(function (vertex) { return vertex.print(); });
     };
@@ -114,4 +125,4 @@ g.addEdge(five, eight, 112);
 g.addEdge(four, six, 321);
 g.addEdge(seven, nine, 85);
 g.addEdge(six, eight, 22);
-console.log(g.dijkstras(one));
+console.log(g.shortestPath(one, six));

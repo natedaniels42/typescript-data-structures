@@ -106,8 +106,21 @@ class Graph {
         return { distances, previous };
     }
 
+    shortestPath(start: Vertex, end: Vertex): {distance: number, path: unknown[]} {
+        const { distances, previous } = this.dijkstras(start);
+        const distance: number = distances[`${end.data}`];
+        const path: unknown[] = [];
+        let current: Vertex | null = end;
+        while (current) {
+            path.unshift(current.data);
+            current = previous[`${current.data}`];
+        }
+        return { distance, path }
+    }
+
     print(): void {
         this.vertices.forEach(vertex => vertex.print());
     }
 }
 
+export default Graph;
