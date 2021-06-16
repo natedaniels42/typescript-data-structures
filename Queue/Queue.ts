@@ -1,4 +1,5 @@
 import LinkedList from "../LinkedList/LinkedList";
+import Node from "../Node/Node";
 
 class Queue {
     queue: LinkedList;
@@ -27,4 +28,16 @@ class Queue {
             this.size++;
         }
     }
+
+    dequeue(): Node {
+        if (this.isEmpty()) {
+            throw('Queue is empty');
+        } else {
+            const removedHead: Node = this.queue.removeHead();
+            this.size--;
+            return removedHead;
+        }
+    }
 }
+
+export default Queue;

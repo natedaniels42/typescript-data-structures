@@ -88,13 +88,4 @@ var LinkedList = /** @class */ (function () {
     };
     return LinkedList;
 }());
-var list = new LinkedList();
-list.addToHead(1);
-list.addToHead(2);
-list.addToHead(3);
-list.addToTail(4);
-list.addToTail(5);
-list.addToTail(6);
-console.log(list.print());
-list.reverse();
-console.log(list.print());
+exports["default"] = LinkedList;
