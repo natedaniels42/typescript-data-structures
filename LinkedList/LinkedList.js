@@ -13,6 +13,20 @@ var LinkedList = /** @class */ (function () {
         }
         this.head = newHead;
     };
+    LinkedList.prototype.removeHead = function () {
+        var removedHead = this.head;
+        if (!removedHead) {
+            return null;
+        }
+        if (!removedHead.getNextNode()) {
+            this.head = null;
+        }
+        else {
+            this.head = removedHead.getNextNode();
+            removedHead.setNextNode(null);
+        }
+        return removedHead;
+    };
     LinkedList.prototype.print = function () {
         var str = '<head> ';
         var current = this.head;
@@ -29,4 +43,10 @@ var list = new LinkedList();
 list.addToHead(1);
 list.addToHead(2);
 list.addToHead(3);
+console.log(list.print());
+list.removeHead();
+console.log(list.print());
+list.removeHead();
+console.log(list.print());
+list.removeHead();
 console.log(list.print());

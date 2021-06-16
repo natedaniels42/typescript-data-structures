@@ -18,6 +18,22 @@ class LinkedList {
         this.head = newHead;
     }
 
+    removeHead(): Node | null {
+        const removedHead = this.head;
+
+        if (!removedHead) {
+            return null;
+        }
+
+        if (!removedHead.getNextNode()) {
+            this.head = null;
+        } else {
+            this.head = removedHead.getNextNode();
+            removedHead.setNextNode(null);
+        }
+        return removedHead;
+    }
+
     print(): string {
         let str: string = '<head> ';
         let current: Node | null = this.head;
@@ -32,10 +48,3 @@ class LinkedList {
     }
 }
 
-const list: LinkedList = new LinkedList();
-list.addToHead(1);
-list.addToHead(2);
-list.addToHead(3);
-
-
-console.log(list.print());
