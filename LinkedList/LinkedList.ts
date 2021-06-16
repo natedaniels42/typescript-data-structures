@@ -34,6 +34,21 @@ class LinkedList {
         return removedHead;
     }
 
+    addToTail(data: any): void {
+        const newTail: Node = new Node(data);
+        let current: Node | null = this.head;
+
+        if (!current) {
+            this.head = newTail;
+        } else {
+            while(current.getNextNode()) {
+                current = current.getNextNode();
+            }
+            current.setNextNode(newTail);
+        }
+
+    }
+
     print(): string {
         let str: string = '<head> ';
         let current: Node | null = this.head;
@@ -47,4 +62,3 @@ class LinkedList {
         return str;
     }
 }
-
