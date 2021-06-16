@@ -20,7 +20,7 @@ class Queue {
         return this.size === 0;
     }
 
-    enqueue(data): void {
+    enqueue(data: unknown): void {
         if (!this.hasRoom()) {
             throw('Queue is full');
         } else {
