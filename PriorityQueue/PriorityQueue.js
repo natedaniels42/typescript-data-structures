@@ -18,6 +18,36 @@ var PriorityQueue = /** @class */ (function () {
             current = this.getParent(current);
         }
     };
+    PriorityQueue.prototype.popMin = function () {
+        this.swap(1, this.size);
+        var min = this.heap.pop();
+        this.size--;
+        this.heapify();
+        return min;
+    };
+    PriorityQueue.prototype.heapify = function () {
+        var current = 1;
+        var left = this.getLeft(current);
+        var right = this.getRight(current);
+        while (this.canSwap(current, left, right)) {
+            if (this.exists(left) && this.exists(right)) {
+                if (this.heap[left].priority < this.heap[right].priority) {
+                    this.swap(current, left);
+                    current = left;
+                }
+                else {
+                    this.swap(current, right);
+                    current = right;
+                }
+            }
+            else {
+                this.swap(current, left);
+                current = left;
+            }
+            left = this.getLeft(current);
+            right = this.getRight(current);
+        }
+    };
     PriorityQueue.prototype.canSwap = function (current, left, right) {
         return (this.exists(left) && this.heap[left].priority < this.heap[current].priority) || (this.exists(right) && this.heap[right].priority < this.heap[current].priority);
     };
@@ -43,6 +73,14 @@ var PriorityQueue = /** @class */ (function () {
     return PriorityQueue;
 }());
 var pq = new PriorityQueue();
-pq.add(new Vertex_1["default"](1), 1);
 pq.add(new Vertex_1["default"](0), 0);
+pq.add(new Vertex_1["default"](1), 1);
+pq.add(new Vertex_1["default"](2), 2);
+pq.add(new Vertex_1["default"](3), 3);
+pq.add(new Vertex_1["default"](4), 4);
+pq.add(new Vertex_1["default"](5), 5);
+for (var i = 0; i < 6; i++) {
+    pq.popMin();
+    console.log(pq);
+}
 console.log(pq.heap);

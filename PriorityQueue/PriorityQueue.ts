@@ -24,6 +24,37 @@ class PriorityQueue {
         }
     }
 
+    popMin(): {vertex:Vertex, priority: number} {
+        this.swap(1, this.size);
+        const min = this.heap.pop();
+        this.size--;
+        this.heapify();
+        return min;
+    }
+
+    heapify(): void {
+        let current: number = 1;
+        let left: number = this.getLeft(current);
+        let right: number = this.getRight(current);
+
+        while(this.canSwap(current, left, right)) {
+            if (this.exists(left) && this.exists(right)) {
+                if (this.heap[left].priority < this.heap[right].priority) {
+                    this.swap(current, left);
+                    current = left;
+                } else {
+                    this.swap(current, right);
+                    current = right;
+                }
+            } else {
+                this.swap(current, left);
+                current = left;
+            }
+            left = this.getLeft(current);
+            right = this.getRight(current);
+        }
+    }
+ 
     canSwap(current: number, left: number, right: number): boolean {
         return (this.exists(left) && this.heap[left].priority < this.heap[current].priority) || (this.exists(right) && this.heap[right].priority < this.heap[current].priority);
     }
@@ -52,3 +83,5 @@ class PriorityQueue {
         return current * 2 + 1;
     }
 }
+
+export default PriorityQueue;
