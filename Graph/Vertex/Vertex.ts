@@ -8,6 +8,10 @@ class Vertex {
         this.data = data;
         this.edges = [];
     }
+
+    addEdge(vertex: Vertex, weight: number | null = null) {
+        this.edges.push(new Edge(this, vertex, weight));
+    }
 }
 
 export default Vertex;
