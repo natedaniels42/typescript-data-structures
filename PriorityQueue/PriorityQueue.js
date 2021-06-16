@@ -1,6 +1,5 @@
 "use strict";
 exports.__esModule = true;
-var Vertex_1 = require("../Graph/Vertex/Vertex");
 var PriorityQueue = /** @class */ (function () {
     function PriorityQueue() {
         this.heap = [null];
@@ -72,15 +71,4 @@ var PriorityQueue = /** @class */ (function () {
     };
     return PriorityQueue;
 }());
-var pq = new PriorityQueue();
-pq.add(new Vertex_1["default"](0), 0);
-pq.add(new Vertex_1["default"](1), 1);
-pq.add(new Vertex_1["default"](2), 2);
-pq.add(new Vertex_1["default"](3), 3);
-pq.add(new Vertex_1["default"](4), 4);
-pq.add(new Vertex_1["default"](5), 5);
-for (var i = 0; i < 6; i++) {
-    pq.popMin();
-    console.log(pq);
-}
-console.log(pq.heap);
+exports["default"] = PriorityQueue;

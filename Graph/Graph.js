@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var Vertex_1 = require("./Vertex/Vertex");
 var Queue_1 = require("../Queue/Queue");
+var PriorityQueue_1 = require("../PriorityQueue/PriorityQueue");
 var Graph = /** @class */ (function () {
     function Graph(isWeighted, isDirected) {
         if (isWeighted === void 0) { isWeighted = false; }
@@ -61,6 +62,33 @@ var Graph = /** @class */ (function () {
             });
         }
     };
+    Graph.prototype.dijkstras = function (start) {
+        var distances = {};
+        var previous = {};
+        var queue = new PriorityQueue_1["default"]();
+        queue.add(start, 0);
+        this.vertices.forEach(function (vertex) {
+            distances["" + vertex.data] = Infinity;
+            previous["" + vertex.data] = null;
+        });
+        distances["" + start.data] = 0;
+        var _loop_1 = function () {
+            var vertex = queue.popMin().vertex;
+            vertex.edges.forEach(function (edge) {
+                var alternate = edge.weight + distances["" + vertex.data];
+                var neighborValue = edge.end.data;
+                if (alternate < distances["" + neighborValue]) {
+                    distances["" + neighborValue] = alternate;
+                    previous["" + neighborValue] = vertex;
+                    queue.add(edge.end, distances["" + neighborValue]);
+                }
+            });
+        };
+        while (!queue.isEmpty()) {
+            _loop_1();
+        }
+        return { distances: distances, previous: previous };
+    };
     Graph.prototype.print = function () {
         this.vertices.forEach(function (vertex) { return vertex.print(); });
     };
@@ -86,4 +114,4 @@ g.addEdge(five, eight, 112);
 g.addEdge(four, six, 321);
 g.addEdge(seven, nine, 85);
 g.addEdge(six, eight, 22);
-g.breadthFirstTraversal(one);
+console.log(g.dijkstras(one));
