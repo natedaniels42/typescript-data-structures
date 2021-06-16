@@ -15,6 +15,36 @@ var MinHeap = /** @class */ (function () {
             current = this.getParent(current);
         }
     };
+    MinHeap.prototype.popMin = function () {
+        this.swap(1, this.size);
+        var min = this.heap.pop();
+        this.size--;
+        this.heapify();
+        return min;
+    };
+    MinHeap.prototype.heapify = function () {
+        var current = 1;
+        var left = this.getLeft(current);
+        var right = this.getRight(current);
+        while (this.canSwap(current, left, right)) {
+            if (this.exists(left) && this.exists(right)) {
+                if (this.heap[left] < this.heap[right]) {
+                    this.swap(current, left);
+                    current = left;
+                }
+                else {
+                    this.swap(current, right);
+                    current = right;
+                }
+            }
+            else {
+                this.swap(current, left);
+                current = left;
+            }
+            left = this.getLeft(current);
+            right = this.getRight(current);
+        }
+    };
     MinHeap.prototype.canSwap = function (current, left, right) {
         return (this.exists(left) && this.heap[left] < this.heap[current]) || (this.exists(right) && this.heap[right] < this.heap[current]);
     };
@@ -42,5 +72,8 @@ var MinHeap = /** @class */ (function () {
 var mh = new MinHeap();
 for (var i = 100; i >= 0; i -= 10) {
     mh.add(i);
+}
+for (var i = 0; i < 10; i++) {
+    mh.popMin();
     console.log(mh.heap);
 }

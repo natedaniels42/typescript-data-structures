@@ -22,6 +22,37 @@ class MinHeap {
         }
     }
 
+    popMin(): number {
+        this.swap(1, this.size);
+        const min = this.heap.pop();
+        this.size--;
+        this.heapify();
+        return min;
+    }
+
+    heapify(): void {
+        let current: number = 1;
+        let left: number = this.getLeft(current);
+        let right: number = this.getRight(current);
+
+        while (this.canSwap(current, left, right)) {
+            if (this.exists(left) && this.exists(right)) {
+                if (this.heap[left] < this.heap[right]) {
+                    this.swap(current, left);
+                    current = left;
+                } else {
+                    this.swap(current, right);
+                    current = right;
+                }
+            } else {
+                this.swap(current, left);
+                current = left;
+            }
+            left = this.getLeft(current);
+            right = this.getRight(current);
+        }
+    } 
+
     canSwap(current:number, left: number, right: number): boolean {
         return (this.exists(left) && this.heap[left] < this.heap[current]) || (this.exists(right) && this.heap[right] < this.heap[current]);
     }
@@ -51,4 +82,4 @@ class MinHeap {
     }
 }
 
-
+export default MinHeap;
